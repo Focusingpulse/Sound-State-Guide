@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://focusingpulse.github.io/Sound-State-Guide/sitemap.xml
