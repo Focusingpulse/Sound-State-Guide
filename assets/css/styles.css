@@ -589,3 +589,18 @@ h1 {
     max-width: none;
   }
 }
+
+.disclosure {
+  margin: 2rem 0;
+  padding: 1.1rem 1.25rem;
+  border-left: 4px solid var(--accent);
+  background: var(--bg-alt);
+  border-radius: 0 10px 10px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.disclosure strong {
+  color: var(--text);
+}
