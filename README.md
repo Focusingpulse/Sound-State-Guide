@@ -24,11 +24,23 @@ GitHub Pages is configured to deploy from a branch.
 
 ## Schema model
 
-- Homepage: WebSite, Organization, WebPage
-- Guide: WebPage, Article
-- Thompson lineage: WebPage, Article, Person, Organization
-- Tools: WebPage, ItemList
-- About: WebPage, AboutPage
+The `Organization` and `Person` entities are **defined once on the homepage** and referenced by `@id` from every other page. Each page also carries a **short local block with the same `@id`**, because Google resolves structured data page by page, and a bare `@id` reference with no local definition gives that page nothing.
+
+Canonical `@id`s (permanent, pick them once):
+- `.../#organization` — Sound State Guide
+- `.../#person` — the person behind the site
+
+| Page | Nodes |
+|---|---|
+| Homepage | WebSite, Organization *(canonical)*, WebPage, Person *(canonical)* |
+| Guide | WebPage, Article, Organization (short), Person (short) |
+| Thompson lineage | WebPage, Article, Person (Dr. Thompson, a subject), Organization (Center for Neuroacoustic Research) |
+| Tools | WebPage, ItemList, Organization (short), Person (short) |
+| About | WebPage, AboutPage, Organization (short), Person (short) |
+
+**Known gap — `sameAs` is not set.** The site declares no social profiles anywhere, so there is no honest value for it. Add `sameAs` to the Person and Organization blocks once real profiles exist (an author page on this site, a YouTube channel, or a LinkedIn profile). Do not invent or borrow them.
+
+**Domain caveat.** Every `@id` is currently anchored to `focusingpulse.github.io/Sound-State-Guide/`, which is a platform domain, not one we own. `@id`s are permanent, so settle the domain before this markup is treated as final, or every reference has to be rewritten at once.
 
 ## Structure
 
