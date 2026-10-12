@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>The fog line that follows you down | Sound State Guide</title>
+  <meta name="description" content="Prototype: a sticky fog line at the bottom of the page that crystallizes as you scroll and resolves into a tagline." />
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <style>
+    :root {
+      --band-h: clamp(78px, 10vw, 122px);
+      --brass: #D9A45B;
+      --brass-hi: #F2EDE3;
+      --brass-mid: #8A979D;
+    }
+    body { padding-bottom: var(--band-h); }
+
+    .proto-note {
+      max-width: 760px; margin: 0 auto; padding: 2.5rem 1rem 0;
+      color: var(--muted); font-size: 0.95rem; line-height: 1.7;
+    }
+    .proto-note strong { color: #1f2933; }
+    .proto-note code { font-family: ui-monospace, monospace; background: rgba(86,111,130,0.10); padding: 0.1rem 0.35rem; border-radius: 5px; }
+
+    /* ---------- the band ---------- */
+    .fogband {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      height: var(--band-h);
+      z-index: 40;
+      overflow: hidden;
+      background: #232A2E;
+      pointer-events: none;
+      will-change: opacity;
+    }
+    .fogband .bl {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+      display: block;
+    }
+    .fogband .haze {
+      position: absolute; inset: -20% -10% -20% -10%;
+      background:
+        radial-gradient(42% 90% at 8% 60%, rgba(242,237,227,0.34), transparent 70%),
+        radial-gradient(36% 80% at 26% 40%, rgba(242,237,227,0.26), transparent 72%),
+        radial-gradient(44% 96% at 2% 30%, rgba(242,237,227,0.22), transparent 74%),
+        radial-gradient(30% 70% at 44% 55%, rgba(242,237,227,0.14), transparent 76%);
+      filter: blur(22px);
+      pointer-events: none;
+    }
+    /* the band blends up into the page instead of cutting it */
+    .fogband .edge {
+      position: absolute; left: 0; right: 0; top: 0; height: 62px;
+      background: linear-gradient(180deg,
+        rgba(246,244,239,1) 0%,
+        rgba(246,244,239,0.72) 22%,
+        rgba(246,244,239,0.30) 55%,
+        rgba(246,244,239,0) 100%);
+      pointer-events: none;
+    }
+    .fogband .tag {
+      position: absolute; left: 0; right: 0; bottom: 12px;
+      text-align: center; pointer-events: none;
+    }
+    .fogband .tag strong {
+      display: block;
+      font-size: clamp(0.95rem, 1.5vw, 1.35rem);
+      font-weight: 800; letter-spacing: 0.01em;
+      color: var(--brass-hi);
+      text-shadow: 0 2px 14px rgba(35,42,46,0.85);
+    }
+    .fogband .tag span {
+      display: block; margin-top: 0.25rem;
+      font-family: ui-monospace, monospace; font-size: 0.66rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(138,151,157,0.9);
+    }
+    @media (max-width: 700px) {
+      .fogband .bl { object-position: center 40%; }
+      .fogband .tag strong { font-size: 0.92rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../../">Sound State Guide</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../../guide/">Guide</a>
+        <a href="../../thompson-lineage/">Thompson Lineage</a>
+        <a href="../../tools/">Tools</a>
+        <a href="../../about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="proto-note">
+    <p><strong>Prototype: the fog line that follows you down.</strong> A band pinned to the bottom of the window, hazy and tangled at the top of the page, slowly crystallizing as you scroll, until a tagline materializes out of it at the end. Watch the band, not the page.</p>
+    <p>Freeze any frame with <code>?f=0.6</code> in the address. Reduced motion renders the resolved frame immediately.</p>
+    <p>Draft, <code>noindex</code>, not linked from the site.</p>
+  </div>
+
+  <main class="page">
+    <div class="container prose">
+      <p class="eyebrow">Homepage, prototype</p>
+      <h1>Take control of your state without losing your footing.</h1>
+      <p class="lead">This is stand-in body copy at roughly homepage length. The point of the page is the distance you can scroll, because that distance is what drives the band.</p>
+      <h2>What this is</h2>
+      <p>Sound State Guide is a plain-language guide to sound-based tools, brainwave entrainment, and the lineage the work comes from.</p><p>Nothing here is sold as a treatment. The point is understanding, so you can judge a tool instead of being carried by it.</p>
+      <h2>The five states</h2>
+      <p>Delta, theta, alpha, beta, gamma. Five named ranges, and most people already move through all of them every day without knowing the names.</p><p>Learning the names is not the useful part. Learning that you can move between them on purpose is.</p>
+      <h2>What the evidence actually says</h2>
+      <p>Some of this is well studied. Some of it is thinner than the marketing suggests. Both belong on the page.</p><p>Where the evidence is mixed, this site says so, because a tool you understand is worth more than a tool you believe in.</p>
+      <h2>Where to start</h2>
+      <p>Pick one thing. Use it for a week. Notice what changed, if anything. That is a better test than any claim on this page.</p><p>If it helps, keep it. If it does not, drop it without guilt. Either answer is useful information about you.</p>
+      <p>End of the page. This is where the line has fully crystallized and the tagline has finished materializing.</p>
+    </div>
+  </main>
+
+  <div class="fogband" id="fogband" aria-hidden="true">
+    <img class="bl" id="blTangle" src="../img/lid-tangle-brass.svg" alt="" />
+    <img class="bl" id="blBlur" src="../img/band-signal-blur-brass.svg" alt="" />
+    <img class="bl" id="blSharp" src="../img/lid-signal-brass.svg" alt="" />
+    <div class="haze" id="blHaze"></div>
+    <div class="edge"></div>
+    <div class="tag">
+      <strong id="tagLine">Sound that helps you find the right state.</strong>
+      <span>Clarity first. Keep your hand on the wheel.</span>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var tangle = document.getElementById('blTangle');
+    var blur = document.getElementById('blBlur');
+    var sharp = document.getElementById('blSharp');
+    var haze = document.getElementById('blHaze');
+    var tag = document.getElementById('tagLine');
+    if (!tangle || !blur || !sharp) return;
+
+    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+    function apply(p) {
+      p = clamp(p);
+      tangle.style.opacity = (0.90 - 0.86 * p).toFixed(3);
+      haze.style.opacity = (1 - 1.02 * p).toFixed(3);
+      /* the crystallise: hazy copy dissolves, sharp copy resolves in its place */
+      blur.style.opacity = (0.92 - 0.92 * Math.min(1, p * 1.35)).toFixed(3);
+      sharp.style.opacity = (0.04 + 0.96 * clamp((p - 0.18) * 1.45)).toFixed(3);
+      sharp.style.transform = 'scale(' + (1.012 - 0.012 * p).toFixed(4) + ')';
+      tag.style.opacity = clamp((p - 0.62) * 3.1).toFixed(3);
+    }
+
+    var params = new URLSearchParams(location.search);
+    if (params.has('f')) {
+      document.documentElement.classList.add('frozen');
+      apply(parseFloat(params.get('f')) || 0);
+      return;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { apply(1); return; }
+
+    var queued = false;
+    function update() {
+      queued = false;
+      var span = document.documentElement.scrollHeight - window.innerHeight;
+      if (span <= 0) { apply(1); return; }
+      apply(window.scrollY / span);
+    }
+    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+  </script>
+</body>
+</html>
