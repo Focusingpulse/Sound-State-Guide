@@ -79,33 +79,6 @@
       --band-h: clamp(96px, 10vw, 122px);
     }
 
-    /* ---- the opening ---- */
-    .fogtrack { position: relative; height: 150vh; }
-    .fogstage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #232A2E; }
-    .fog-bg { position: absolute; inset: 0; }
-    .fog-bg-dark { background: linear-gradient(180deg, #20272B 0%, #232A2E 55%, #1C2226 100%); }
-    .fog-bg-cream { background: #f6f4ef; opacity: 0; }
-    .fog-layer {
-      position: absolute; left: 0; width: 118%; margin-left: -9%;
-      top: 50%; height: auto; transform: translateY(-50%);
-      display: block; pointer-events: none;
-    }
-    .fog-haze {
-      position: absolute; inset: -10%;
-      background:
-        radial-gradient(44% 62% at 10% 40%, rgba(242,237,227,0.34), transparent 70%),
-        radial-gradient(38% 54% at 30% 28%, rgba(242,237,227,0.28), transparent 72%),
-        radial-gradient(46% 66% at 4% 72%, rgba(242,237,227,0.24), transparent 74%),
-        radial-gradient(34% 46% at 48% 58%, rgba(242,237,227,0.16), transparent 76%);
-      filter: blur(34px); pointer-events: none;
-    }
-    .fog-cue {
-      position: absolute; left: 0; right: 0; bottom: 2.6rem; text-align: center;
-      font-family: ui-monospace, monospace; font-size: 0.68rem;
-      letter-spacing: 0.26em; text-transform: uppercase;
-      color: rgba(138,151,157,0.85); pointer-events: none;
-    }
-
     /* ---- the bottom line ---- */
     body { padding-bottom: var(--band-h); }
     .fogband {
@@ -139,11 +112,8 @@
     .fogband .btag strong {
       display: block; font-size: clamp(0.95rem, 1.5vw, 1.35rem); font-weight: 800;
       color: var(--brass-hi); text-shadow: 0 2px 14px rgba(35,42,46,0.85);
-    }
-    .fogband .btag span {
-      display: block; margin-top: 0.25rem;
-      font-family: ui-monospace, monospace; font-size: 0.66rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(148,161,167,0.95);
+      /* starts out of focus and comes in. See the script for the ramp. */
+      filter: blur(6.2px);
     }
 
     /* ---- the echo on inner pages ---- */
@@ -167,15 +137,10 @@
     }
 
     @media (max-width: 700px) {
-      .fogtrack { height: 118vh; }
-      .fog-layer { width: 190%; margin-left: -45%; }
       .fogband .bl { object-position: center 40%; }
       .fogband .btag strong { font-size: 0.92rem; }
-      .fogband .btag span { font-size: 0.58rem; letter-spacing: 0.14em; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .fogtrack { height: auto; }
-      .fogstage { position: relative; height: 70vh; }
       .fog-lid .lid-signal { animation: none; opacity: 1; }
     }
   </style>
@@ -195,18 +160,6 @@
   </header>
 
   <main>
-  <section class="fogtrack" id="fogtrack" aria-hidden="true">
-    <div class="fogstage">
-      <div class="fog-bg fog-bg-dark"></div>
-      <div class="fog-bg fog-bg-cream" id="fogCream"></div>
-      <div class="fog-haze" id="fogHaze"></div>
-      <img class="fog-layer" id="fogTangle" src="assets/img/fog-tangle.svg" alt="" />
-      <img class="fog-layer" id="fogBlur" src="assets/img/fog-signal-blur.svg" alt="" />
-      <img class="fog-layer" id="fogSignal" src="assets/img/fog-signal.svg" alt="" />
-      <div class="fog-cue" id="fogCue">scroll</div>
-    </div>
-  </section>
-
 
     <section class="hero hero-home">
       <div class="hero-glow hero-glow-top" aria-hidden="true"></div>
@@ -416,7 +369,6 @@
     <div class="bedge"></div>
     <div class="btag">
       <strong id="btagLine">Sound that helps you find the right state.</strong>
-      <span>Clarity first. Keep your hand on the wheel.</span>
     </div>
   </div>
 
@@ -426,31 +378,14 @@
     function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
     function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
 
-    /* ---- the opening: fog resolves into the site ---- */
-    var track = document.getElementById('fogtrack');
-    var cream = document.getElementById('fogCream');
-    var haze = document.getElementById('fogHaze');
-    var tangle = document.getElementById('fogTangle');
-    var blur = document.getElementById('fogBlur');
-    var signal = document.getElementById('fogSignal');
-    var cue = document.getElementById('fogCue');
-
-    function opening(p) {
-      haze.style.opacity = (1 - 1.02 * clamp(p / 0.8)).toFixed(3);
-      tangle.style.opacity = (0.90 - 0.86 * clamp(p / 0.9)).toFixed(3);
-      blur.style.opacity = (0.92 - 0.92 * clamp(p / 0.7)).toFixed(3);
-      signal.style.opacity = (0.04 + 0.96 * ease(clamp((p - 0.15) / 0.75))).toFixed(3);
-      cream.style.opacity = clamp((p - 0.55) / 0.37).toFixed(3);
-      if (cue) cue.style.opacity = (1 - clamp(p / 0.22)).toFixed(3);
-    }
-
-    /* ---- the bottom line: the tagline is present throughout and
-            clarifies with everything else. It never pops in. ---- */
+    /* ---- the bottom line: the tagline starts out of focus and blurs into
+            legibility as the signal crystallizes. It never pops in. ---- */
     var bt = document.getElementById('blTangle');
     var bb = document.getElementById('blBlur');
     var bs = document.getElementById('blSharp');
     var bh = document.getElementById('blHaze');
     var btag = document.getElementById('btagLine');
+    if (!bt || !bb || !bs || !btag) return;
 
     function band(p) {
       bt.style.opacity = (0.90 - 0.86 * p).toFixed(3);
@@ -458,23 +393,20 @@
       bb.style.opacity = (0.92 - 0.92 * clamp(p / 0.72)).toFixed(3);
       bs.style.opacity = (0.04 + 0.96 * ease(clamp((p - 0.18) / 0.72))).toFixed(3);
       bs.style.transform = 'scale(' + (1.012 - 0.012 * p).toFixed(4) + ')';
-      /* present from the first pixel, clarifying gradually */
-      btag.style.opacity = (0.24 + 0.76 * ease(clamp(p / 0.85))).toFixed(3);
+
+      var clarity = ease(clamp(p / 0.85));
+      btag.style.opacity = (0.38 + 0.62 * clarity).toFixed(3);
+      /* quantised so the blur does not repaint on every scroll pixel */
+      btag.style.filter = 'blur(' + (6.2 * (1 - clarity)).toFixed(1) + 'px)';
     }
 
     var params = new URLSearchParams(location.search);
-    var forced = params.has('f') ? clamp(parseFloat(params.get('f')) || 0) : null;
-
-    if (forced !== null) { opening(forced); band(forced); return; }
-    if (reduce) { opening(1); band(1); return; }
+    if (params.has('f')) { band(clamp(parseFloat(params.get('f')) || 0)); return; }
+    if (reduce) { band(1); return; }
 
     var queued = false;
     function update() {
       queued = false;
-      if (track) {
-        var span = track.offsetHeight - window.innerHeight;
-        opening(span > 0 ? -track.getBoundingClientRect().top / span : 1);
-      }
       var total = document.documentElement.scrollHeight - window.innerHeight;
       band(total > 0 ? window.scrollY / total : 1);
     }
