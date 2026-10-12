@@ -68,6 +68,121 @@
       }
     ]
   }</script>
+  <style>
+    /* ==== brass fog system ==============================================
+       Two elements. Homepage opens in the fog and resolves into the site.
+       A line pinned to the bottom of the window crystallizes as you read
+       and carries the tagline. Inner pages carry only a thin echo.
+       Everything animates opacity and transform only. No filter animates.
+       ================================================================== */
+    :root {
+      --brass: #D9A45B;
+      --brass-hi: #F2EDE3;
+      --brass-mid: #8A979D;
+      --brass-bg: #232A2E;
+      --band-h: clamp(96px, 10vw, 122px);
+    }
+
+    /* ---- the opening ---- */
+    .fogtrack { position: relative; height: 150vh; }
+    .fogstage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #232A2E; }
+    .fog-bg { position: absolute; inset: 0; }
+    .fog-bg-dark { background: linear-gradient(180deg, #20272B 0%, #232A2E 55%, #1C2226 100%); }
+    .fog-bg-cream { background: #f6f4ef; opacity: 0; }
+    .fog-layer {
+      position: absolute; left: 0; width: 118%; margin-left: -9%;
+      top: 50%; height: auto; transform: translateY(-50%);
+      display: block; pointer-events: none;
+    }
+    .fog-haze {
+      position: absolute; inset: -10%;
+      background:
+        radial-gradient(44% 62% at 10% 40%, rgba(242,237,227,0.34), transparent 70%),
+        radial-gradient(38% 54% at 30% 28%, rgba(242,237,227,0.28), transparent 72%),
+        radial-gradient(46% 66% at 4% 72%, rgba(242,237,227,0.24), transparent 74%),
+        radial-gradient(34% 46% at 48% 58%, rgba(242,237,227,0.16), transparent 76%);
+      filter: blur(34px); pointer-events: none;
+    }
+    .fog-cue {
+      position: absolute; left: 0; right: 0; bottom: 2.6rem; text-align: center;
+      font-family: ui-monospace, monospace; font-size: 0.68rem;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: rgba(138,151,157,0.85); pointer-events: none;
+    }
+
+    /* ---- the bottom line ---- */
+    body { padding-bottom: var(--band-h); }
+    .fogband {
+      position: fixed; left: 0; right: 0; bottom: 0; height: var(--band-h);
+      z-index: 40; overflow: hidden; background: var(--brass-bg); pointer-events: none;
+    }
+    .fogband .bl {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center center; display: block;
+    }
+    .fogband .bhaze {
+      position: absolute; inset: -20% -10%;
+      background:
+        radial-gradient(42% 90% at 8% 60%, rgba(242,237,227,0.34), transparent 70%),
+        radial-gradient(36% 80% at 26% 40%, rgba(242,237,227,0.26), transparent 72%),
+        radial-gradient(44% 96% at 2% 30%, rgba(242,237,227,0.22), transparent 74%),
+        radial-gradient(30% 70% at 44% 55%, rgba(242,237,227,0.14), transparent 76%);
+      filter: blur(22px); pointer-events: none;
+    }
+    /* a hairline, not a cream fade: the band sits over both the dark opening
+       and the cream page, so a page-coloured fade reads as a light bar at the
+       top of the home page */
+    .fogband .bedge {
+      position: absolute; left: 0; right: 0; top: 0; height: 1px;
+      background: linear-gradient(90deg,
+        rgba(217,164,91,0) 0%, rgba(217,164,91,0.45) 22%,
+        rgba(217,164,91,0.45) 78%, rgba(217,164,91,0) 100%);
+      pointer-events: none;
+    }
+    .fogband .btag { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; }
+    .fogband .btag strong {
+      display: block; font-size: clamp(0.95rem, 1.5vw, 1.35rem); font-weight: 800;
+      color: var(--brass-hi); text-shadow: 0 2px 14px rgba(35,42,46,0.85);
+    }
+    .fogband .btag span {
+      display: block; margin-top: 0.25rem;
+      font-family: ui-monospace, monospace; font-size: 0.66rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(148,161,167,0.95);
+    }
+
+    /* ---- the echo on inner pages ---- */
+    .fog-lid {
+      position: relative; height: clamp(112px, 15vw, 216px); overflow: hidden;
+      background: linear-gradient(180deg, #20272B 0%, #232A2E 70%, #232A2E 100%);
+    }
+    .fog-lid img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center center; display: block;
+    }
+    .fog-lid .lid-signal { animation: lidResolve 1.7s cubic-bezier(.22,.7,.3,1) both; }
+    @keyframes lidResolve {
+      from { opacity: 0.10; transform: translateY(12px); }
+      to   { opacity: 1;    transform: none; }
+    }
+    .fog-lid::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 54px;
+      background: linear-gradient(180deg, rgba(246,244,239,0) 0%, rgba(246,244,239,0.92) 100%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .fogtrack { height: 118vh; }
+      .fog-layer { width: 260%; margin-left: -80%; }
+      .fogband .bl { object-position: center 40%; }
+      .fogband .btag strong { font-size: 0.92rem; }
+      .fogband .btag span { font-size: 0.58rem; letter-spacing: 0.14em; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fogtrack { height: auto; }
+      .fogstage { position: relative; height: 70vh; }
+      .fog-lid .lid-signal { animation: none; opacity: 1; }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -82,6 +197,11 @@
       </nav>
     </div>
   </header>
+  <div class="fog-lid" aria-hidden="true">
+    <img src="../assets/img/band-tangle.svg" alt="" />
+    <img class="lid-signal" src="../assets/img/band-signal.svg" alt="" />
+  </div>
+
   <main class="page">
     <div class="container prose">
       <p class="eyebrow">Core guide</p>
