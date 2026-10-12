@@ -63,9 +63,27 @@ Sound-State-Guide/
 └── robots.txt
 ```
 
+## Paths — read before adding a link or an asset
+
+**Every path in this site is relative, and it has to stay that way.**
+
+It was not always. Every link and asset was written root-absolute (`/guide/`, `/assets/css/styles.css`)
+while the site is served from the `/Sound-State-Guide/` subpath, so the stylesheet and all four nav
+targets returned **404 on the live site** and the homepage rendered as unstyled HTML. Fixed 2026-10-12.
+
+The rule that follows:
+
+- On the homepage, paths are bare: `assets/css/styles.css`, `guide/`
+- On a subpage, they go up one: `../assets/css/styles.css`, `../guide/`, `../about/`
+- Never write a leading `/`. It works nowhere this site is hosted, and it will still be wrong on a
+  custom domain unless the site sits at the root.
+
+Check with `grep -rohE '(href|src)="/[^"]*"' --include=*.html .` — it should return nothing.
+
 ## Notes
 
 - This site is educational, not medical.
 - Keep claims cautious and human.
 - Keep schema aligned with visible content.
 - Keep the Thompson and Skye surfaces distinct.
+- **Content rule, stated by Chris 2026-10-12: no claims. First-hand experience only.** The site shares what has actually been experienced; it does not promise outcomes.
