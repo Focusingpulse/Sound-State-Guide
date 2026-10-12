@@ -143,6 +143,19 @@
     @media (prefers-reduced-motion: reduce) {
       .fog-lid .lid-signal { animation: none; opacity: 1; }
     }
+
+    /* ---- centred hero copy (Chris, 2026-10-12) ---- */
+    .hero-home .hero-copy { text-align: center; margin-inline: auto; }
+    .hero-home .hero-copy h1 {
+      font-size: clamp(2.4rem, 4.3vw, 4.2rem);
+      max-width: 24ch; margin-inline: auto;
+      text-wrap: balance;
+    }
+    /* keep the hero's own content clear of the fixed band */
+    .hero-home { padding-bottom: calc(var(--band-h) + 1.5rem); }
+    .hero-home .hero-copy .lead { margin-inline: auto; }
+    .hero-home .cta-row { justify-content: center; }
+    .hero-home .hero-points { justify-content: center; }
   </style>
 </head>
 <body>
