@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Round 2: three temperatures | Sound State Guide</title>
+  <meta name="description" content="The same console drawing in three finishes. Draft working surface, not published." />
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+  <style>
+    .lab-note {
+      margin: 1.5rem 0 0; padding: 0.9rem 1.1rem;
+      border-left: 4px solid var(--accent); background: var(--bg-alt);
+      border-radius: 0 10px 10px 0; color: var(--muted); font-size: 0.95rem;
+    }
+    .lab-note.warn { border-left-color: #b06a3a; }
+    .plate {
+      margin: 1.1rem 0 0; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      background: #14181a; box-shadow: var(--shadow);
+    }
+    .plate img { width: 100%; display: block; }
+    .swatches { display: flex; gap: 0.5rem; margin: 0.9rem 0 0; flex-wrap: wrap; }
+    .sw { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--muted); font-family: ui-monospace, monospace; }
+    .sw i { width: 18px; height: 18px; border-radius: 5px; display: block; border: 1px solid rgba(0,0,0,0.15); }
+    .dir { margin-top: 3.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+    .dir h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 0.3rem; }
+    .dir .intent { color: var(--muted); max-width: 70ch; }
+    .dir h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); margin: 1.6rem 0 0.5rem; }
+    .dir ul { margin: 0; padding-left: 1.1rem; max-width: 74ch; }
+    .dir li { margin-bottom: 0.45rem; }
+    .verdict { display: inline-block; margin-top: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      background: rgba(86,111,130,0.12); color: var(--accent-dark); }
+    .verdict.pick { background: rgba(122,143,106,0.22); }
+    .verdict.drop { background: rgba(176,106,58,0.16); color: #8a4f26; }
+    .row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; margin-top: 1rem; }
+    .row3 figure { margin: 0; }
+    .row3 img { width: 100%; display: block; border-radius: 12px; border: 1px solid var(--border); }
+    .row3 figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; font-family: ui-monospace, monospace; }
+    @media (max-width: 860px) { .row3 { grid-template-columns: 1fr; } }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: rgba(255,255,255,0.85); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    th, td { text-align: left; padding: 0.8rem 0.9rem; border-bottom: 1px solid var(--border); vertical-align: top; font-size: 0.94rem; }
+    thead th { background: rgba(86,111,130,0.08); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="../../">Sound State Guide</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../../guide/">Guide</a>
+        <a href="../../thompson-lineage/">Thompson Lineage</a>
+        <a href="../../tools/">Tools</a>
+        <a href="../../about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container prose">
+      <p class="eyebrow">Working surface, round 2</p>
+      <h1>Three temperatures</h1>
+      <p class="lead">Same drawing, same layout, three finishes. The console idea is settled. The only open question is how hot the surface runs.</p>
+
+      <p class="lab-note"><strong>Draft.</strong> <code>noindex</code>, not linked from the site, nothing here is live copy. Every plate uses the same geometry, so the palette is the only variable.</p>
+
+      <h2 style="margin-top:2.5rem">What I took from Gemini, and what I left</h2>
+      <p>Its structure is right and I have used it. Its costume is the part I would not ship, and the reason is specific rather than taste.</p>
+      <table>
+        <thead><tr><th>Idea</th><th>Call</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Noise stream vs. driver's cockpit</td><td><strong>Keep</strong></td><td>It is the same conclusion the first round reached independently. Two routes landing on the console is a good sign.</td></tr>
+          <tr><td>Gear positions as the site's navigation</td><td><strong>Keep</strong></td><td>The site already talks about gears and shifting. This turns that language into structure instead of decoration.</td></tr>
+          <tr><td>Noise dissolving into a clean signal, on interaction</td><td><strong>Keep</strong></td><td>That is plate A made live. It is the one animation that would earn its cost.</td></tr>
+          <tr><td>A HUD status line</td><td><strong>Keep, as a label</strong></td><td>"MODE: MANUAL" states a setting. "TARGET: 0.5 to 4.0 Hz" states an outcome, and the site does not promise outcomes.</td></tr>
+          <tr><td>Obsidian plus phosphor green plus grid plus monospace everything</td><td class="drop"><strong>Drop</strong></td><td>It is the default look of every AI product page right now, and it raises arousal. The job here is to lower it.</td></tr>
+          <tr><td>The Matrix frame itself</td><td class="drop"><strong>Drop</strong></td><td>It is a borrowed mythology, and it is the lone operator in the dark. You asked for "you are not alone." Those are different stories.</td></tr>
+          <tr><td>Gear 4 and 5 as Bio-Tuning and practitioner certification</td><td class="drop"><strong>Drop</strong></td><td>Those are CNR's products, sold through a $10,100 registry. In your nav they would imply you sell training. You do not.</td></tr>
+          <tr><td>Photoreal AI cockpit renders</td><td class="drop"><strong>Drop</strong></td><td>Machine-made images carry no copyright, and "8k photorealistic industrial" is the exact texture that reads machine-made.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="dir">
+        <h2>A. Matrix temperature</h2>
+        <p class="intent">Obsidian, phosphor green, amber, grid. The version as described.</p>
+        <div class="swatches">
+          <span class="sw"><i style="background:#0A0D0F"></i>#0A0D0F</span>
+          <span class="sw"><i style="background:#00FF66"></i>#00FF66</span>
+          <span class="sw"><i style="background:#FFB000"></i>#FFB000</span>
+        </div>
+        <div class="plate"><img src="../img/r2-hero-matrix.svg" alt="Hero mock in obsidian with phosphor green and amber accents." /></div>
+        <h3>Honest read</h3>
+        <ul>
+          <li>It has more punch than the other two. The call to action genuinely jumps, and I am not going to pretend otherwise.</li>
+          <li>The green glow bleeds. The waveform halo goes soft and the line loses its edge.</li>
+          <li>Green on black with a grid is the visual signature of a startup landing page. It reads energetic and slightly aggressive, which is the opposite of what someone looking for sleep or calm is shopping for.</li>
+        </ul>
+        <span class="verdict drop">Highest impact, wrong signal</span>
+      </div>
+
+      <div class="dir">
+        <h2>B. Brass temperature</h2>
+        <p class="intent">Deep neutral dark, brass as the live element, cream controls, sage as the secondary. A real instrument rather than a screen.</p>
+        <div class="swatches">
+          <span class="sw"><i style="background:#232A2E"></i>#232A2E</span>
+          <span class="sw"><i style="background:#D9A45B"></i>#D9A45B</span>
+          <span class="sw"><i style="background:#F2EDE3"></i>#F2EDE3</span>
+          <span class="sw"><i style="background:#8FA67C"></i>#8FA67C</span>
+        </div>
+        <div class="plate"><img src="../img/r2-hero-brass.svg" alt="Hero mock in a deep neutral dark with brass accents and cream controls." /></div>
+        <div class="plate"><img src="../img/r2-instrument-brass.svg" alt="Instrument plate: a lever resting on a scale of five named states, brass on a deep neutral dark." /></div>
+        <h3>What it does</h3>
+        <ul>
+          <li>Keeps the console authority and loses the sci-fi costume. It reads like a piece of equipment you own, not a screen you are being sold on.</li>
+          <li>Brass and cream are already the temperature of the site's cream ground and sage accent, so this is a dark room in the same house.</li>
+          <li>Amber is doing double duty: it is the live signal and it is the honest caution color for the automatic-drift side.</li>
+          <li>Holds up as flat vector. No glow dependence, so it survives a cheap phone screen in daylight.</li>
+        </ul>
+        <span class="verdict pick">My pick</span>
+      </div>
+
+      <div class="dir">
+        <h2>C. Sage temperature</h2>
+        <p class="intent">The site's own accent on a warm slate dark. The conservative option.</p>
+        <div class="swatches">
+          <span class="sw"><i style="background:#1F2A30"></i>#1F2A30</span>
+          <span class="sw"><i style="background:#9BB48A"></i>#9BB48A</span>
+          <span class="sw"><i style="background:#E8E3D9"></i>#E8E3D9</span>
+        </div>
+        <div class="plate"><img src="../img/r2-hero-console.svg" alt="Hero mock in warm slate with sage accents." /></div>
+        <div class="plate"><img src="../img/r2-instrument-console.svg" alt="Instrument plate in warm slate with sage accents." /></div>
+        <h3>Honest read</h3>
+        <ul>
+          <li>The most continuous with what is already built. Nothing on the site would need repainting.</li>
+          <li>It is also the flattest. Muted sage on muted slate gives the live element no lift, so the lever and the call to action both sit back. The instrument stops looking like something you would reach for.</li>
+        </ul>
+        <span class="verdict">Safe, low energy</span>
+      </div>
+
+      <div class="dir">
+        <h2>The motif, in all three</h2>
+        <p class="intent">Plate A, the noise dissolving into a signal, rendered at each temperature. This is the image I would run as the connective tissue between pages.</p>
+        <div class="row3">
+          <figure><img src="../img/r2-fogline-matrix.svg" alt="Fog line in the matrix palette." /><figcaption>matrix</figcaption></figure>
+          <figure><img src="../img/r2-fogline-brass.svg" alt="Fog line in the brass palette." /><figcaption>brass</figcaption></figure>
+          <figure><img src="../img/r2-fogline-console.svg" alt="Fog line in the sage palette." /><figcaption>sage</figcaption></figure>
+        </div>
+        <h3>One note on this motif</h3>
+        <ul>
+          <li>In the dark versions the left side reads as a tangle emerging out of darkness, which is close to right.</li>
+          <li>The light version from round 1 still reads better as fog, because a pale haze against pale ground is what fog actually looks like. If the site stays cream, keep round 1's version of this plate for the light sections.</li>
+        </ul>
+      </div>
+
+      <div class="dir">
+        <h2>What I would do next</h2>
+        <ul>
+          <li><strong>Pick the temperature.</strong> Everything else follows from it, and it is the one decision I cannot make for you.</li>
+          <li>Then I build the real thing: a homepage hero, a gear-position nav, and the automatic-drift versus manual-shift section, in the chosen finish, at real page size.</li>
+          <li>The noise-to-signal animation waits until the static version is settled. Animation on top of an unsettled layout is wasted work.</li>
+          <li>Nothing here touches the domain question or the schema, which are still the two gates on the entity side.</li>
+        </ul>
+      </div>
+
+      <p class="lab-note">Round 1, if you want to put them side by side: <a href="../">Visual directions, round 1</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-title">Sound State Guide</p>
+        <p>Draft visual surface. Not indexed, not linked, not published.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
